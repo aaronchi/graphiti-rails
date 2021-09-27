@@ -36,18 +36,18 @@ module Graphiti
   end
 end
 
-ActiveSupport.on_load(:action_controller) do
-  include Graphiti::Rails::Context
-  include Graphiti::Rails::Debugging
+#. ActiveSupport.on_load(:action_controller) do
+#   include Graphiti::Rails::Context
+#   include Graphiti::Rails::Debugging
 
-  # A global handler here is somewhat risky. However, we explicitly only handle JSON:API by default.
-  register_exception Exception, status: :passthrough, handler: Graphiti::Rails::FallbackHandler
+#   # A global handler here is somewhat risky. However, we explicitly only handle JSON:API by default.
+#   register_exception Exception, status: :passthrough, handler: Graphiti::Rails::FallbackHandler
 
-  register_exception Graphiti::Errors::InvalidRequest,   status: 400, handler: Graphiti::Rails::InvalidRequestHandler
-  register_exception Graphiti::Errors::RecordNotFound,   status: 404, handler: Graphiti::Rails::ExceptionHandler
-  register_exception Graphiti::Errors::RemoteWrite,      status: 400, handler: Graphiti::Rails::ExceptionHandler
-  register_exception Graphiti::Errors::SingularSideload, status: 400, handler: Graphiti::Rails::ExceptionHandler
-end
+#   register_exception Graphiti::Errors::InvalidRequest,   status: 400, handler: Graphiti::Rails::InvalidRequestHandler
+#   register_exception Graphiti::Errors::RecordNotFound,   status: 404, handler: Graphiti::Rails::ExceptionHandler
+#   register_exception Graphiti::Errors::RemoteWrite,      status: 400, handler: Graphiti::Rails::ExceptionHandler
+#   register_exception Graphiti::Errors::SingularSideload, status: 400, handler: Graphiti::Rails::ExceptionHandler
+#  end
 
 ActiveSupport.on_load(:active_record) do
   require "graphiti/adapters/active_record"
